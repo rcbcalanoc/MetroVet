@@ -27,7 +27,7 @@
         app:layout_constraintTop_toTopOf="@id/header" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/main_icon"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginTop="4dp"
@@ -36,25 +36,11 @@
         app:layout_constraintTop_toTopOf="@id/header"
         app:srcCompat="@drawable/icon" />
 
-    <TextView
-        android:id="@+id/header1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/neue_frutiger_world_heavy"
-        android:text="@string/header1"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header" />
-
     <FrameLayout
         android:id="@+id/fragmentContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/header1"></FrameLayout>
+        app:layout_constraintTop_toBottomOf="@+id/header"></FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

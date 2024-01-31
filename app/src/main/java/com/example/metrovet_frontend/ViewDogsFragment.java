@@ -15,10 +15,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+// Existing imports...
+
 public class ViewDogsFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private DogsAdapter adapter;
+
+    // Define a constant for the argument key
+    public static final String ARG_DOG_NAME = "dogName";
 
     public ViewDogsFragment() {
         // Required empty public constructor
@@ -35,7 +40,17 @@ public class ViewDogsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         recyclerView = view.findViewById(R.id.recyclerView);
-        adapter = new DogsAdapter(getDogsList()); // Create an adapter and pass the dogs list
+        adapter = new DogsAdapter(getDogsList());
+
+        // Set item click listener
+        adapter.setOnItemClickListener(new DogsAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(String dogName) {
+                // Handle item click, navigate to dog information, etc.
+                showDogInformation(dogName);
+            }
+        });
+
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
     }
@@ -47,5 +62,23 @@ public class ViewDogsFragment extends Fragment {
         dogsList.add("Dog 2");
         // Add more dog items as needed
         return dogsList;
+    }
+
+    private void showDogInformation(String dogName) {
+        // Create a new fragment instance for dog information
+        DogInformationFragment dogInformationFragment = new DogInformationFragment();
+
+        // Create arguments bundle
+        Bundle args = new Bundle();
+        args.putString(ARG_DOG_NAME, dogName);
+
+        // Set arguments to the fragment
+        dogInformationFragment.setArguments(args);
+
+        // Navigate to the dog information fragment
+        getParentFragmentManager().beginTransaction()
+                .replace(R.id.fragmentContainer, dogInformationFragment)
+                .addToBackStack(null)  // Optional: Add to back stack for back navigation
+                .commit();
     }
 }

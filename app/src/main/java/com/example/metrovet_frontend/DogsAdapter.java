@@ -14,9 +14,14 @@ import java.util.List;
 public class DogsAdapter extends RecyclerView.Adapter<DogsAdapter.DogViewHolder> {
 
     private List<String> dogsList;
+    private OnItemClickListener onItemClickListener;
 
     public DogsAdapter(List<String> dogsList) {
         this.dogsList = dogsList;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.onItemClickListener = listener;
     }
 
     @NonNull
@@ -30,6 +35,16 @@ public class DogsAdapter extends RecyclerView.Adapter<DogsAdapter.DogViewHolder>
     public void onBindViewHolder(@NonNull DogViewHolder holder, int position) {
         String dogName = dogsList.get(position);
         holder.bind(dogName);
+
+        // Set click listener for the item
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onItemClickListener != null) {
+                    onItemClickListener.onItemClick(dogName);
+                }
+            }
+        });
     }
 
     @Override
@@ -49,5 +64,10 @@ public class DogsAdapter extends RecyclerView.Adapter<DogsAdapter.DogViewHolder>
         public void bind(String dogName) {
             dogNameTextView.setText(dogName);
         }
+    }
+
+    // Interface for item click listener
+    public interface OnItemClickListener {
+        void onItemClick(String dogName);
     }
 }
