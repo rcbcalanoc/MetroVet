@@ -1,3 +1,17 @@
 <resources>
-    <string name="app_name">MetroVet-FrontEnd</string>
+    <string name="app_name">MetroVet</string>
+    <string name="admin">ADMIN</string>
+    <string name="user">USER</string>
+    <string name="name">Name</string>
+    <string name="password">Password</string>
+    <string name="success_message">HORRAY! YOU HAVE SUCCESSFULLY ADOPTED HIM!</string>
+    <string name="add_dog">Add Dog</string>
+    <string name="delete_dog">Delete Dog</string>
+    <string name="edit_dog">Edit Dog</string>
+    <string name="dog_type">Type of Dog</string>
+    <string name="information">Information</string>
+    <string name="header1">Adopt a dog now!</string>
+    <string name="adopt">ADOPT!</string>
+    <string name="add">ADD</string>
+    <string name="update">UPDATE</string>
 </resources>
