@@ -23,7 +23,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Handle the click for the user button
-                navigateToMainActivity();
+                navigateToUserActivity();
             }
         });
 
@@ -31,14 +31,21 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Handle the click for the admin button
-                navigateToMainActivity();
+                navigateToAdminActivity();
             }
         });
     }
 
-    // Method to navigate to MainActivity
-    private void navigateToMainActivity() {
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+    // Method to navigate to UserActivity
+    private void navigateToUserActivity() {
+        Intent intent = new Intent(LoginActivity.this, UserActivity.class);
+        startActivity(intent);
+        finish(); // Optional: Close the LoginActivity if you don't want it in the back stack
+    }
+
+    // Method to navigate to AdminActivity
+    private void navigateToAdminActivity() {
+        Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
         startActivity(intent);
         finish(); // Optional: Close the LoginActivity if you don't want it in the back stack
     }
