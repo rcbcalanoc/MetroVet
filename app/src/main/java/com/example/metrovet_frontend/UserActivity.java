@@ -11,6 +11,9 @@ public class UserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_activity_main); // Set the content view to user_activity_main.xml
 
-        // Your additional logic for UserActivity goes here
+        // Load the ViewDogsFragment
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentContainer, new ViewDogsFragment())
+                .commit();
     }
 }
