@@ -15,15 +15,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-// Existing imports...
-
 public class ViewDogsFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private DogsAdapter adapter;
 
-    // Define a constant for the argument key
+    // Define constants for the argument keys
     public static final String ARG_DOG_NAME = "dogName";
+    public static final String ARG_DOG_INFORMATION = "dogInformation";
 
     public ViewDogsFragment() {
         // Required empty public constructor
@@ -45,9 +44,9 @@ public class ViewDogsFragment extends Fragment {
         // Set item click listener
         adapter.setOnItemClickListener(new DogsAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(String dogName) {
+            public void onItemClick(Dog dog) {
                 // Handle item click, navigate to dog information, etc.
-                showDogInformation(dogName);
+                showDogInformation(dog);
             }
         });
 
@@ -55,30 +54,23 @@ public class ViewDogsFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
     }
 
-    private List<String> getDogsList() {
-        // Create a list of dog items
-        List<String> dogsList = new ArrayList<>();
-        dogsList.add("Dog 1");
-        dogsList.add("Dog 2");
+    private List<Dog> getDogsList() {
+        // Create a list of dog items with information
+        List<Dog> dogsList = new ArrayList<>();
+        dogsList.add(new Dog("Dog 1", "Information about Dog 1"));
+        dogsList.add(new Dog("Dog 2", "Information about Dog 2"));
         // Add more dog items as needed
         return dogsList;
     }
 
-    private void showDogInformation(String dogName) {
+    private void showDogInformation(Dog dog) {
         // Create a new fragment instance for dog information
-        DogInformationFragment dogInformationFragment = new DogInformationFragment();
-
-        // Create arguments bundle
-        Bundle args = new Bundle();
-        args.putString(ARG_DOG_NAME, dogName);
-
-        // Set arguments to the fragment
-        dogInformationFragment.setArguments(args);
+        DogInformationFragment dogInformationFragment = DogInformationFragment.newInstance(dog.getName(), dog.getInformation());
 
         // Navigate to the dog information fragment
         getParentFragmentManager().beginTransaction()
                 .replace(R.id.fragmentContainer, dogInformationFragment)
-                .addToBackStack(null)  // Optional: Add to back stack for back navigation
+                .addToBackStack(null)
                 .commit();
     }
 }

@@ -12,17 +12,20 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 public class DogInformationFragment extends Fragment {
-    // Constant for argument key
+
+    // Constants for argument keys
     public static final String ARG_DOG_NAME = "dogName";
+    public static final String ARG_DOG_INFORMATION = "dogInformation";
 
     public DogInformationFragment() {
         // Required empty public constructor
     }
 
-    public static DogInformationFragment newInstance(String dogName) {
+    public static DogInformationFragment newInstance(String dogName, String dogInformation) {
         DogInformationFragment fragment = new DogInformationFragment();
         Bundle args = new Bundle();
         args.putString(ARG_DOG_NAME, dogName);
+        args.putString(ARG_DOG_INFORMATION, dogInformation);
         fragment.setArguments(args);
         return fragment;
     }
@@ -37,14 +40,15 @@ public class DogInformationFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Access the dog name from arguments
+        // Access the dog name and information from arguments
         String dogName = getArguments().getString(ARG_DOG_NAME);
+        String dogInformation = getArguments().getString(ARG_DOG_INFORMATION);
 
         // Update the UI with dog information
-        // You can access views and set data here
         TextView dogInfoHeader = view.findViewById(R.id.dog_info_header);
-        dogInfoHeader.setText(dogName);
+        TextView dogInfoText = view.findViewById(R.id.dog_info_text);
 
-        // Update other views accordingly
+        dogInfoHeader.setText(dogName);
+        dogInfoText.setText(dogInformation);
     }
 }
