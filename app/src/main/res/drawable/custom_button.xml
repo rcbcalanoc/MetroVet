@@ -11,7 +11,7 @@
     <item android:state_pressed="true">
         <shape>
             <corners android:radius="10dp" /> <!-- Adjust the radius as needed for rounded corners -->
-            <solid android:color="#7B4C33" /> <!-- Set the pressed state background color -->
+            <solid android:color="@color/button_pressed" /> <!-- Set the pressed state background color -->
         </shape>
     </item>
 </selector>
