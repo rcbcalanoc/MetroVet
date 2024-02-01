@@ -1,6 +1,7 @@
 // DogInformationFragment.java
 package com.example.metrovet_frontend;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 public class DogInformationFragment extends Fragment {
@@ -51,12 +53,16 @@ public class DogInformationFragment extends Fragment {
         dogInfoHeader.setText(dogName);
         dogInfoText.setText(dogInformation);
 
+        // Create a Typeface instance for your custom font
+        Typeface customFont = ResourcesCompat.getFont(requireContext(), R.font.neue_frutiger_world_black);
+
         // Set click listener for the adopt button
         Button adoptButton = view.findViewById(R.id.adopt_button);
         adoptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Display the success message
+                // Display the success message with a different font family
+                dogInfoText.setTypeface(customFont);
                 dogInfoText.setText(getString(R.string.success_message));
             }
         });
