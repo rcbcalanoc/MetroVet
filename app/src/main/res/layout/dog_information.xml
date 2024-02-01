@@ -51,7 +51,7 @@
         app:layout_constraintTop_toBottomOf="@+id/dog_info_header" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/adopt_button"
         android:layout_width="144dp"
         android:layout_height="57dp"
         android:layout_marginStart="132dp"
