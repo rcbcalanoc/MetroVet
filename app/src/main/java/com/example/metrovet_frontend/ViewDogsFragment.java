@@ -19,10 +19,7 @@ public class ViewDogsFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private DogsAdapter adapter;
-
-    // Define constants for the argument keys
-    public static final String ARG_DOG_NAME = "dogName";
-    public static final String ARG_DOG_INFORMATION = "dogInformation";
+    private AdminActivity adminActivity;
 
     public ViewDogsFragment() {
         // Required empty public constructor
@@ -37,6 +34,8 @@ public class ViewDogsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        adminActivity = (AdminActivity) requireActivity();
 
         recyclerView = view.findViewById(R.id.recyclerView);
         adapter = new DogsAdapter(getDogsList());
@@ -66,6 +65,9 @@ public class ViewDogsFragment extends Fragment {
     private void showDogInformation(Dog dog) {
         // Create a new fragment instance for dog information
         DogInformationFragment dogInformationFragment = DogInformationFragment.newInstance(dog.getName(), dog.getInformation());
+
+        // Hide the buttons in AdminActivity when moving to dog information fragment
+        adminActivity.setButtonsVisibility(View.GONE);
 
         // Navigate to the dog information fragment
         getParentFragmentManager().beginTransaction()

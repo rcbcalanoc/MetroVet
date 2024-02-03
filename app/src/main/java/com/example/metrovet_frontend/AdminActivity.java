@@ -12,10 +12,18 @@ import androidx.fragment.app.FragmentTransaction;
 
 public class AdminActivity extends AppCompatActivity {
 
+    private ImageView addButton;
+    private ImageView deleteButton;
+    private ImageView editButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_activity_main);
+
+        addButton = findViewById(R.id.add_button);
+        deleteButton = findViewById(R.id.delete_button);
+        editButton = findViewById(R.id.edit_button);
 
         // Load the ViewDogsFragment
         getSupportFragmentManager().beginTransaction()
@@ -30,10 +38,12 @@ public class AdminActivity extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragmentContainer, new ViewDogsFragment())
                         .commit();
+
+                // Make the buttons visible again when returning to the list
+                setButtonsVisibility(View.VISIBLE);
             }
         });
 
-        ImageView addButton = findViewById(R.id.add_button);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -42,5 +52,12 @@ public class AdminActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    // Method to set the visibility of buttons
+    public void setButtonsVisibility(int visibility) {
+        addButton.setVisibility(visibility);
+        deleteButton.setVisibility(visibility);
+        editButton.setVisibility(visibility);
     }
 }
