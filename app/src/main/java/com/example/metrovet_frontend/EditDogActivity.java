@@ -10,15 +10,16 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class AddDogActivity extends AppCompatActivity {
+public class EditDogActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_dog);
+        setContentView(R.layout.edit_dog);
 
         // Get references to UI elements
         TextView headerName = findViewById(R.id.header_name);
+
         // Set click listener for the header_name TextView
         headerName.setOnClickListener(new View.OnClickListener() {
             @Override

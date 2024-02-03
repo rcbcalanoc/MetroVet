@@ -52,6 +52,15 @@ public class AdminActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Start the AddDogActivity
+                Intent intent = new Intent(AdminActivity.this, EditDogActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     // Method to set the visibility of buttons
