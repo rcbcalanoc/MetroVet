@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +21,7 @@ public class ViewDogsFragment extends Fragment {
     private RecyclerView recyclerView;
     private DogsAdapter adapter;
     private AdminActivity adminActivity;
+    private boolean deleteButtonClicked = false;
 
     public ViewDogsFragment() {
         // Required empty public constructor
@@ -66,6 +68,9 @@ public class ViewDogsFragment extends Fragment {
         // Create a new fragment instance for dog information
         DogInformationFragment dogInformationFragment = DogInformationFragment.newInstance(dog.getName(), dog.getInformation());
 
+        // Toggle the visibility of delete_item_button
+        toggleDeleteItemButtonVisibility();
+
         // Hide the buttons in AdminActivity when moving to dog information fragment
         adminActivity.setButtonsVisibility(View.GONE);
 
@@ -74,5 +79,21 @@ public class ViewDogsFragment extends Fragment {
                 .replace(R.id.fragmentContainer, dogInformationFragment)
                 .addToBackStack(null)
                 .commit();
+    }
+
+    // Method to toggle visibility of delete_item_button
+    public void toggleDeleteItemButtonVisibility() {
+        deleteButtonClicked = !deleteButtonClicked;
+
+        recyclerView.post(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < recyclerView.getChildCount(); i++) {
+                    View view = recyclerView.getChildAt(i);
+                    ImageView deleteItemButton = view.findViewById(R.id.delete_item_button);
+                    deleteItemButton.setVisibility(deleteButtonClicked ? View.VISIBLE : View.INVISIBLE);
+                }
+            }
+        });
     }
 }

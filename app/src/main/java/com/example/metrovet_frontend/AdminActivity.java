@@ -15,6 +15,7 @@ public class AdminActivity extends AppCompatActivity {
     private ImageView addButton;
     private ImageView deleteButton;
     private ImageView editButton;
+    private ViewDogsFragment viewDogsFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +26,11 @@ public class AdminActivity extends AppCompatActivity {
         deleteButton = findViewById(R.id.delete_button);
         editButton = findViewById(R.id.edit_button);
 
+        viewDogsFragment = new ViewDogsFragment();
+
         // Load the ViewDogsFragment
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragmentContainer, new ViewDogsFragment())
+                .replace(R.id.fragmentContainer, viewDogsFragment)
                 .commit();
 
         TextView headerName = findViewById(R.id.header_name);
@@ -36,7 +39,7 @@ public class AdminActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Navigate back to ViewDogsFragment
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragmentContainer, new ViewDogsFragment())
+                        .replace(R.id.fragmentContainer, viewDogsFragment)
                         .commit();
 
                 // Make the buttons visible again when returning to the list
@@ -53,10 +56,18 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Toggle the visibility of delete_item_button in ViewDogsFragment
+                viewDogsFragment.toggleDeleteItemButtonVisibility();
+            }
+        });
+
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Start the AddDogActivity
+                // Start the EditDogActivity
                 Intent intent = new Intent(AdminActivity.this, EditDogActivity.class);
                 startActivity(intent);
             }
