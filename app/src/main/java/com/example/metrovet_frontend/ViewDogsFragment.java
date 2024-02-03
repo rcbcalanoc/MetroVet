@@ -20,7 +20,6 @@ public class ViewDogsFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private DogsAdapter adapter;
-    private AdminActivity adminActivity;
     private boolean deleteButtonClicked = false;
 
     public ViewDogsFragment() {
@@ -36,8 +35,6 @@ public class ViewDogsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        adminActivity = (AdminActivity) requireActivity();
 
         recyclerView = view.findViewById(R.id.recyclerView);
         adapter = new DogsAdapter(getDogsList());
@@ -68,11 +65,15 @@ public class ViewDogsFragment extends Fragment {
         // Create a new fragment instance for dog information
         DogInformationFragment dogInformationFragment = DogInformationFragment.newInstance(dog.getName(), dog.getInformation());
 
-        // Toggle the visibility of delete_item_button
-        toggleDeleteItemButtonVisibility();
+        // Toggle the visibility of delete_item_button if the activity is AdminActivity
+        if (getActivity() instanceof AdminActivity) {
+            toggleDeleteItemButtonVisibility();
+        }
 
-        // Hide the buttons in AdminActivity when moving to dog information fragment
-        adminActivity.setButtonsVisibility(View.GONE);
+        // Hide the buttons in the activity when moving to dog information fragment
+        if (getActivity() instanceof AdminActivity) {
+            ((AdminActivity) requireActivity()).setButtonsVisibility(View.GONE);
+        }
 
         // Navigate to the dog information fragment
         getParentFragmentManager().beginTransaction()
