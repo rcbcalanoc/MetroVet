@@ -1,0 +1,8 @@
+<!-- custom_form_design.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <!-- Background Color -->
+    <solid android:color="#EFD0BF" />
+    <!-- Border Radius -->
+    <corners android:radius="10dp" />
+</shape>

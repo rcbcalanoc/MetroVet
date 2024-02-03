@@ -1,8 +1,10 @@
 // AdminActivity.java
 package com.example.metrovet_frontend;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,6 +30,16 @@ public class AdminActivity extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragmentContainer, new ViewDogsFragment())
                         .commit();
+            }
+        });
+
+        ImageView addButton = findViewById(R.id.add_button);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Start the AddDogActivity
+                Intent intent = new Intent(AdminActivity.this, AddDogActivity.class);
+                startActivity(intent);
             }
         });
     }
