@@ -1,7 +1,6 @@
 package com.example.metrovet_frontend.model;
 
 
-
 public class Dog {
 
     private int id;
@@ -9,11 +8,13 @@ public class Dog {
     private String dogName;
     private String dogDescription;
 
+    private String dogType;
     //private byte[] imageData; // Assuming you store the image as a byte array
 
     public Dog(String dogName, String dogDescription, byte[] imageData) {
         this.dogName = dogName;
         this.dogDescription = dogDescription;
+        this.dogType = dogType;
         //this.imageData = imageData;
     }
 
@@ -44,11 +45,12 @@ public class Dog {
         this.dogDescription = dogDescription;
     }
 
-    //public byte[] getImageData() {
-     //   return imageData;
-   // }
+    public String getDogType() {
+        return dogType;
+    }
 
-    //public void setImageData(byte[] imageData) {
-    //    this.imageData = imageData;
-   //}
+    public void setDogType(String dogType) {
+        this.dogType = dogType;
+    }
+
 }

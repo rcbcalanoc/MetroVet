@@ -1,5 +1,4 @@
 package com.example.metrovet_frontend;
-
 public class Dog {
     private String name;
     private String information;
