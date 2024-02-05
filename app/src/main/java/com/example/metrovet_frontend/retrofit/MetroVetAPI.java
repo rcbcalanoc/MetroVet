@@ -24,4 +24,11 @@ public interface MetroVetAPI {
 
     @DELETE("/dog/{id}")
     Call <Void> deleteDog(@Path("id") int id);
+
+    @PUT("/update-dog/{id}")
+    Call<Dog> updateDog(@Path("id") int id, @Body Dog dog);
+
+    @GET("/dog/{id}")
+    Call<Dog> getDog(@Path("id") int id);
+
 }

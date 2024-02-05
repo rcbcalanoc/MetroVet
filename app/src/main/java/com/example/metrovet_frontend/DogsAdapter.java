@@ -4,6 +4,7 @@ package com.example.metrovet_frontend;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -26,7 +27,6 @@ public class DogsAdapter extends RecyclerView.Adapter<DogsAdapter.DogViewHolder>
         this.dogsList = dogsList;
         notifyDataSetChanged();
     }
-
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.onItemClickListener = listener;
@@ -53,6 +53,16 @@ public class DogsAdapter extends RecyclerView.Adapter<DogsAdapter.DogViewHolder>
                 }
             }
         });
+
+        // Set click listener for the edit_button
+        holder.editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onItemClickListener != null) {
+                    onItemClickListener.onEditButtonClick(dog);
+                }
+            }
+        });
     }
 
     @Override
@@ -63,10 +73,12 @@ public class DogsAdapter extends RecyclerView.Adapter<DogsAdapter.DogViewHolder>
     static class DogViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView dogNameTextView;
+        private final ImageView editButton;
 
         public DogViewHolder(@NonNull View itemView) {
             super(itemView);
             dogNameTextView = itemView.findViewById(R.id.item_dog_name);
+            editButton = itemView.findViewById(R.id.edit_button);
         }
 
         public void bind(Dog dog) {
@@ -77,5 +89,7 @@ public class DogsAdapter extends RecyclerView.Adapter<DogsAdapter.DogViewHolder>
     // Interface for item click listener
     public interface OnItemClickListener {
         void onItemClick(Dog dog);
+
+        void onEditButtonClick(Dog dog);
     }
 }
