@@ -9,6 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.metrovet_frontend.model.Dog;
+
 import java.util.List;
 
 public class DogsAdapter extends RecyclerView.Adapter<DogsAdapter.DogViewHolder> {
@@ -19,6 +21,12 @@ public class DogsAdapter extends RecyclerView.Adapter<DogsAdapter.DogViewHolder>
     public DogsAdapter(List<Dog> dogsList) {
         this.dogsList = dogsList;
     }
+
+    public void setDogsList(List<Dog> dogsList) {
+        this.dogsList = dogsList;
+        notifyDataSetChanged();
+    }
+
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.onItemClickListener = listener;
@@ -62,7 +70,7 @@ public class DogsAdapter extends RecyclerView.Adapter<DogsAdapter.DogViewHolder>
         }
 
         public void bind(Dog dog) {
-            dogNameTextView.setText(dog.getName());
+            dogNameTextView.setText(dog.getDogName());
         }
     }
 

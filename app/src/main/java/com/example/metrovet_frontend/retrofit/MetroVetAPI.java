@@ -21,4 +21,7 @@ public interface MetroVetAPI {
     // Get all Dogs
     @GET("/dogs")
     Call<List<Dog>> getAllDogs();
+
+    @DELETE("/dog/{id}")
+    Call <Void> deleteDog(@Path("id") int id);
 }

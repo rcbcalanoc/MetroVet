@@ -13,8 +13,18 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.metrovet_frontend.model.Dog;
+import com.example.metrovet_frontend.retrofit.MetroVetAPI;
+import com.example.metrovet_frontend.retrofit.RetrofitService;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ViewDogsFragment extends Fragment {
 
@@ -37,7 +47,7 @@ public class ViewDogsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         recyclerView = view.findViewById(R.id.recyclerView);
-        adapter = new DogsAdapter(getDogsList());
+        adapter = new DogsAdapter(new ArrayList<Dog>());
 
         // Set item click listener
         adapter.setOnItemClickListener(new DogsAdapter.OnItemClickListener() {
@@ -47,23 +57,60 @@ public class ViewDogsFragment extends Fragment {
                 showDogInformation(dog);
             }
         });
-
+        adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+
+
+        fetchDogsData();
     }
 
-    private List<Dog> getDogsList() {
+    private void fetchDogsData() {
+        RetrofitService retrofitService = new RetrofitService();
+        MetroVetAPI metroVetAPI = retrofitService.getRetrofit().create(MetroVetAPI.class);
+        Call<List<Dog>> call = metroVetAPI.getAllDogs();
+
+        call.enqueue(new Callback<List<Dog>>() {
+            @Override
+            public void onResponse(Call<List<Dog>> call, Response<List<Dog>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    // Update the adapter with the fetched data
+                    //adapter.setDogsList(response.body());
+                    //adapter.notifyDataSetChanged();
+                    updateAdapterData(response.body());
+                } else {
+                    // Handle unsuccessful response
+                    Logger.getLogger("API_ERROR", "Failed to fetch dogs data");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Dog>> call, Throwable t) {
+                // Handle failure
+                Logger.getLogger(AddDogActivity.class.getName()).log(Level.SEVERE, "Error Occurred");
+            }
+        });
+
+    }
+
+    private void updateAdapterData(List<Dog> newDogsList) {
+        // Update the adapter with the new data
+        adapter.setDogsList(newDogsList);
+    }
+
+
+/*    private List<Dog> getDogsList() {
         // Create a list of dog items with information
         List<Dog> dogsList = new ArrayList<>();
         dogsList.add(new Dog("Dog 1", "Information about Dog 1"));
         dogsList.add(new Dog("Dog 2", "Information about Dog 2"));
         // Add more dog items as needed
         return dogsList;
-    }
+    }*/
 
     private void showDogInformation(Dog dog) {
         // Create a new fragment instance for dog information
-        DogInformationFragment dogInformationFragment = DogInformationFragment.newInstance(dog.getName(), dog.getInformation());
+        DogInformationFragment dogInformationFragment = DogInformationFragment.newInstance(dog.getDogName(), dog.getDogDescription());
 
         // Toggle the visibility of delete_item_button if the activity is AdminActivity
         if (getActivity() instanceof AdminActivity) {

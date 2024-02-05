@@ -79,6 +79,7 @@ public class AddDogActivity extends AppCompatActivity {
                             @Override
                             public void onResponse(Call<Dog> call, Response<Dog> response) {
                                 Toast.makeText(AddDogActivity.this, "Saved!", Toast.LENGTH_LONG).show();
+                                finish();
                             }
 
                             @Override
