@@ -110,7 +110,7 @@ public class ViewDogsFragment extends Fragment {
 
     private void showDogInformation(Dog dog) {
         // Create a new fragment instance for dog information
-        DogInformationFragment dogInformationFragment = DogInformationFragment.newInstance(dog.getDogName(), dog.getDogDescription());
+        DogInformationFragment dogInformationFragment = DogInformationFragment.newInstance(dog.getDogName(), dog.getDogType(), dog.getDogDescription());
 
         // Toggle the visibility of delete_item_button if the activity is AdminActivity
         if (getActivity() instanceof AdminActivity) {
@@ -128,6 +128,7 @@ public class ViewDogsFragment extends Fragment {
                 .addToBackStack(null)
                 .commit();
     }
+
 
     // Method to toggle visibility of delete_item_button
     public void toggleDeleteItemButtonVisibility() {

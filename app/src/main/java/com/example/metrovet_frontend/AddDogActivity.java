@@ -46,14 +46,14 @@ public class AddDogActivity extends AppCompatActivity {
                 String dogType = dogTypeEditText.getText().toString().trim();
                 String dogInfo = dogInfoEditText.getText().toString().trim();
 
-                // Convert dogInfo to byte array
-                byte[] dogInfoBytes = dogInfo.getBytes(/* specify the encoding, e.g., StandardCharsets.UTF_8 */);
-
                 // Create a new Dog instance
-                Dog newDog = new Dog(dogName, dogType, dogInfoBytes);
+                Dog newDog = new Dog(dogName, dogType, dogInfo);
 
                 // Call the API to add a new dog
                 addDogToAPI(newDog);
+
+                // Navigate to DogInformationFragment with dogInfo
+                showDogInformation(dogName, dogType, dogInfo);
             }
         });
     }
@@ -91,5 +91,17 @@ public class AddDogActivity extends AppCompatActivity {
                 Toast.makeText(AddDogActivity.this, "Error occurred", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    // Method to show DogInformationFragment
+    private void showDogInformation(String dogName, String dogType, String dogInfo) {
+        // Create a new fragment instance for dog information
+        DogInformationFragment dogInformationFragment = DogInformationFragment.newInstance(dogName, dogType, dogInfo);
+
+        // Navigate to the dog information fragment
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentContainer, dogInformationFragment)
+                .addToBackStack(null)
+                .commit();
     }
 }

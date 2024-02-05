@@ -17,17 +17,19 @@ public class DogInformationFragment extends Fragment {
 
     // Constants for argument keys
     public static final String ARG_DOG_NAME = "dogName";
-    public static final String ARG_DOG_INFORMATION = "dogInformation";
+    public static final String ARG_DOG_TYPE = "dogType";
+    public static final String ARG_DOG_INFO = "dogInfo";
 
     public DogInformationFragment() {
         // Required empty public constructor
     }
 
-    public static DogInformationFragment newInstance(String dogName, String dogInformation) {
+    public static DogInformationFragment newInstance(String dogName, String dogType, String dogInfo) {
         DogInformationFragment fragment = new DogInformationFragment();
         Bundle args = new Bundle();
         args.putString(ARG_DOG_NAME, dogName);
-        args.putString(ARG_DOG_INFORMATION, dogInformation);
+        args.putString(ARG_DOG_TYPE, dogType);
+        args.putString(ARG_DOG_INFO, dogInfo);
         fragment.setArguments(args);
         return fragment;
     }
@@ -42,16 +44,17 @@ public class DogInformationFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Access the dog name and information from arguments
+        // Access the dog name, type, and info from arguments
         String dogName = getArguments().getString(ARG_DOG_NAME);
-        String dogInformation = getArguments().getString(ARG_DOG_INFORMATION);
+        String dogType = getArguments().getString(ARG_DOG_TYPE);
+        String dogInfo = getArguments().getString(ARG_DOG_INFO);
 
         // Update the UI with dog information
         TextView dogInfoHeader = view.findViewById(R.id.dog_info_header);
         TextView dogInfoText = view.findViewById(R.id.dog_info_text);
 
-        dogInfoHeader.setText(dogName);
-        dogInfoText.setText(dogInformation);
+        dogInfoHeader.setText(dogName + " - " + dogType);
+        dogInfoText.setText(dogInfo);
 
         // Create a Typeface instance for your custom font
         Typeface customFont = ResourcesCompat.getFont(requireContext(), R.font.neue_frutiger_world_black);

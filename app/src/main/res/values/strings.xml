@@ -5,7 +5,7 @@
     <string name="user">USER</string>
     <string name="name">Name</string>
     <string name="password">Password</string>
-    <string name="success_message">HORRAY! YOU HAVE SUCCESSFULLY ADOPTED HIM!</string>
+    <string name="success_message">HORRAY! YOU HAVE SUCCESSFULLY ADOPTED HIM! JUST FILL UP THE FORM ON THE OPENED TAB</string>
     <string name="add_dog">Add Dog</string>
     <string name="delete_dog">Delete Dog</string>
     <string name="edit_dog">Edit Dog</string>
