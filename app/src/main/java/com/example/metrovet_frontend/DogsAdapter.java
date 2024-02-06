@@ -63,6 +63,16 @@ public class DogsAdapter extends RecyclerView.Adapter<DogsAdapter.DogViewHolder>
                 }
             }
         });
+
+
+        holder.deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onItemClickListener != null) {
+                    onItemClickListener.onDeleteButtonClick(dog);
+                }
+            }
+        });
     }
 
     @Override
@@ -74,11 +84,13 @@ public class DogsAdapter extends RecyclerView.Adapter<DogsAdapter.DogViewHolder>
 
         private final TextView dogNameTextView;
         private final ImageView editButton;
+        private final ImageView deleteButton;
 
         public DogViewHolder(@NonNull View itemView) {
             super(itemView);
             dogNameTextView = itemView.findViewById(R.id.item_dog_name);
             editButton = itemView.findViewById(R.id.edit_button);
+            deleteButton = itemView.findViewById(R.id.delete_item_button);
         }
 
         public void bind(Dog dog) {
@@ -91,5 +103,7 @@ public class DogsAdapter extends RecyclerView.Adapter<DogsAdapter.DogViewHolder>
         void onItemClick(Dog dog);
 
         void onEditButtonClick(Dog dog);
+
+        void onDeleteButtonClick(Dog dog);
     }
 }
