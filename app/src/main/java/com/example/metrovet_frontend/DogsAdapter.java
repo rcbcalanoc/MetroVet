@@ -44,6 +44,11 @@ public class DogsAdapter extends RecyclerView.Adapter<DogsAdapter.DogViewHolder>
         Dog dog = dogsList.get(position);
         holder.bind(dog);
 
+        if (holder.itemView.getContext() instanceof UserActivity) {
+            holder.editButton.setVisibility(View.GONE);
+            holder.deleteButton.setVisibility(View.GONE);
+        }
+
         // Set click listener for the item
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
