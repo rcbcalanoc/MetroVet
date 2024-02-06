@@ -1,6 +1,5 @@
 package com.example.metrovet_frontend;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -71,6 +70,12 @@ public class ViewDogsFragment extends Fragment {
                 // Handle edit button click
                 handleEditButtonClick(dog);
             }
+
+            @Override
+            public void onDeleteButtonClick(Dog dog) {
+                // Call the API to delete the dog with the specified ID
+                deleteDog(dog.getId());
+            }
         });
 
         recyclerView.setAdapter(adapter);
@@ -131,5 +136,31 @@ public class ViewDogsFragment extends Fragment {
         intent.putExtra(EditDogActivity.EXTRA_DOG_ID, dog.getId());
 
         startActivity(intent);
+    }
+
+    private void deleteDog(int dogId) {
+        RetrofitService retrofitService = new RetrofitService();
+        MetroVetAPI metroVetAPI = retrofitService.getRetrofit().create(MetroVetAPI.class);
+
+        Call<Void> call = metroVetAPI.deleteDog(dogId);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    // Successfully deleted, update the UI
+                    fetchDogsData();
+                } else {
+                    // Handle unsuccessful response
+                    Logger.getLogger("API_ERROR").log(Level.SEVERE, "Failed to delete dog");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                // Handle failure
+                Logger.getLogger(AddDogActivity.class.getName()).log(Level.SEVERE, "Error Occurred");
+            }
+        });
     }
 }

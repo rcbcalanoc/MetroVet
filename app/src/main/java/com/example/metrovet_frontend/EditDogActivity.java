@@ -145,7 +145,14 @@ public class EditDogActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     // Dog updated successfully
                     Toast.makeText(EditDogActivity.this, "Dog updated successfully", Toast.LENGTH_SHORT).show();
-                    finish(); // Close the activity after a successful update
+
+                    // Relaunch AdminActivity
+                    Intent intent = new Intent(EditDogActivity.this, AdminActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+
+                    finish(); // Close the activity after relaunching AdminActivity
+
                 } else {
                     // Handle unsuccessful response
                     handleUnsuccessfulUpdate(response);
