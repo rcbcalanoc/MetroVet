@@ -67,6 +67,20 @@ public class DogInformationFragment extends Fragment {
                 // Display the success message with a different font family
                 dogInfoText.setTypeface(customFont);
                 dogInfoText.setText(getString(R.string.success_message));
+
+                // Replace the URL with your desired link
+                String url = "https://forms.gle/neGjcBAn9HHz8TS48";
+
+                // Create an Intent with the ACTION_VIEW action
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+
+                // Set the data (URI) for the Intent
+                intent.setData(Uri.parse(url));
+
+                // Start the browser activity
+                startActivity(intent);  
+
+
             }
         });
     }
