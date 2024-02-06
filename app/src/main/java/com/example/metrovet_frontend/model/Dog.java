@@ -11,6 +11,13 @@ public class Dog {
     private String dogType;
     //private byte[] imageData; // Assuming you store the image as a byte array
 
+    public Dog(int id, String dogName, String dogType, String dogDescription) {
+        this.id = id;
+        this.dogName = dogName;
+        this.dogDescription = dogDescription;
+        this.dogType = dogType;
+    }
+
     public Dog(String dogName, String dogType, String dogDescription) {
         this.dogName = dogName;
         this.dogDescription = dogDescription;
